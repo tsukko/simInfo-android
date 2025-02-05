@@ -87,14 +87,14 @@ fun HomeScreen(
             AndroidView(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(70.dp), // ✅ 高さを適切に設定（後で動的サイズに変更可能）
+                    .height(70.dp), // 高さを適切に設定（後で動的サイズに変更可能）
                 factory = { ctx ->
                     AdView(ctx).apply {
-                        // ✅ AdView の設定
+                        // AdView の設定
                         setAdSize(AdSize.BANNER) // ※ `Adaptive Banner` を使う場合は後述
                         adUnitId = ctx.getString(R.string.ad_unit_id)
 
-                        // ✅ 広告をロード
+                        // 広告をロード
                         loadAd(AdRequest.Builder().build())
                     }
                 }
