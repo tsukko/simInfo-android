@@ -1,10 +1,10 @@
 package jp.co.integrityworks.mysiminfo.ui.home
 
-
 import android.Manifest
 import android.content.pm.PackageManager
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -18,6 +18,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -25,6 +26,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -37,7 +39,6 @@ import com.google.android.gms.ads.AdView
 import jp.co.integrityworks.mysiminfo.BuildConfig
 import jp.co.integrityworks.mysiminfo.R
 import jp.co.integrityworks.mysiminfo.ui.theme.MyAppTheme
-import jp.co.integrityworks.mysiminfo.util.RuntimePermissionAlertDialog
 
 /**
  * メイン画面のコンポーザブル
@@ -73,14 +74,19 @@ fun HomeScreen(
 
     Scaffold(
         topBar = {
-            TopAppBar(title = {
-                Text(
-                    text = if (BuildConfig.DEBUG)
-                        stringResource(id = R.string.app_name) + " (deb)"
-                    else
-                        stringResource(id = R.string.app_name)
+            TopAppBar(
+                title = {
+                    Text(
+                        text = if (BuildConfig.DEBUG)
+                            stringResource(id = R.string.app_name) + " (deb)"
+                        else
+                            stringResource(id = R.string.app_name)
+                    )
+                },
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = Color.Cyan
                 )
-            })
+            )
         },
         bottomBar = {
             // AdMobのAdViewをAndroidViewでラップして表示
@@ -104,13 +110,6 @@ fun HomeScreen(
             BodyCompose(paddingValues = paddingValues, viewModel = viewModel)
         }
     )
-
-    // パーミッションが拒否された場合はダイアログ表示
-    if (!hasPermission) {
-        RuntimePermissionAlertDialog(permission = "必要なパーミッション", onDismissRequest = {
-            hasPermission = false
-        })
-    }
 }
 
 /**
@@ -134,7 +133,8 @@ fun BodyCompose(
             .padding(paddingValues)
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
-            .padding(16.dp)
+            .padding(horizontal = 16.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         InfoItem(
             title = stringResource(id = R.string.phoneNumberLabel),
@@ -182,3 +182,44 @@ fun HomeScreenPreview() {
         HomeScreen(viewModel = HomeViewModel())
     }
 }
+
+//@Composable
+//fun MinimalSwitch() {
+//    var checked by remember { mutableStateOf(false) }
+//
+//    Column(
+//        modifier = Modifier
+//            .fillMaxSize()
+//            .padding(horizontal = 8.dp),
+//        verticalArrangement = Arrangement.spacedBy(16.dp)
+//    ) {
+//        Text(
+//            text = "ここでは、サンプルの設定画面をイメージしています",
+//            style = MaterialTheme.typography.titleSmall
+//        )
+//        // ローカルにタッチターゲット制約を無効化
+//        CompositionLocalProvider(LocalMinimumInteractiveComponentSize provides 0.dp) {
+//            Row(
+//                modifier = Modifier.fillMaxWidth(),
+//                verticalAlignment = Alignment.CenterVertically,
+//                horizontalArrangement = Arrangement.SpaceBetween
+//            ) {
+//                Text(text = "プッシュ通知の設定", style = MaterialTheme.typography.titleSmall)
+//                Switch(
+//                    checked = checked,
+//                    onCheckedChange = { checked = it },
+//                    colors = SwitchDefaults.colors()
+//                )
+//            }
+//        }
+//        Text(text = "設定結果: $checked", style = MaterialTheme.typography.bodyMedium)
+//        Text(text = "その次のアプリ設定", style = MaterialTheme.typography.bodyMedium)
+//        Text(text = "その次のアプリ設定", style = MaterialTheme.typography.bodyMedium)
+//    }
+//}
+//
+//@Preview(showBackground = true)
+//@Composable
+//fun PreviewMinimalSwitch() {
+//    MinimalSwitch()
+//}

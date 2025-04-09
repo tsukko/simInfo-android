@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MySIMInfo</string>
+    <string name="app_name">シム情報</string>
     <string name="title_activity_sub">SubActivity</string>
     <string name="voiceMailNumberLabel">voiceMailNumber</string>
     <string name="phoneNumberLabel">Phone Number</string>

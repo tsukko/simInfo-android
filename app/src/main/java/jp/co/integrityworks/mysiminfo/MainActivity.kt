@@ -10,7 +10,6 @@ import androidx.compose.ui.Modifier
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdSize
 import com.google.android.gms.ads.AdView
-import jp.co.integrityworks.mysiminfo.ui.theme.MyAppTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,13 +21,11 @@ class MainActivity : ComponentActivity() {
         banner.loadAd(AdRequest.Builder().build())
 
         setContent {
-            MyAppTheme {
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    NavigationHost()
-                }
+            Surface(
+                modifier = Modifier.fillMaxSize(),
+                color = MaterialTheme.colorScheme.background
+            ) {
+                NavigationHost()
             }
         }
     }

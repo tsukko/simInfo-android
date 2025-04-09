@@ -11,6 +11,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
+import jp.co.integrityworks.mysiminfo.util.RuntimePermissionAlertDialog as RuntimePermissionAlertDialog1
 
 /**
  * 指定されたパーミッション名に応じた警告ダイアログを表示するComposable。
@@ -59,9 +60,9 @@ fun RuntimePermissionAlertDialog(
 fun RuntimePermissionAlertDialog() {
     val showDialog = remember { mutableStateOf(true) }
     if (showDialog.value) {
-        RuntimePermissionAlertDialog(
-            permission = "必要なパーミッション",
-            onDismissRequest = { showDialog.value = false }
-        )
+//        RuntimePermissionAlertDialog1(
+//            permission = "必要なパーミッション",
+//            onDismissRequest = { showDialog.value = false }
+//        )
     }
 }
