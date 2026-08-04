@@ -55,6 +55,9 @@ android {
         release {
             isMinifyEnabled = true
             isShrinkResources = true
+            ndk {
+                debugSymbolLevel = "FULL"
+            }
             manifestPlaceholders["admob_app_id"] =
                 project.findProperty("admobAppIdStoragePath") as String
             buildConfigField(

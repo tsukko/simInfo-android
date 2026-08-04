@@ -53,6 +53,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.draw.clip
 
@@ -118,6 +119,7 @@ fun HomeScreen(
             AndroidView(
                 modifier = Modifier
                     .fillMaxWidth()
+                    .navigationBarsPadding()
                     .height(70.dp), // 高さを適切に設定（後で動的サイズに変更可能）
                 factory = { ctx ->
                     AdView(ctx).apply {
