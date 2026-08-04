@@ -3,10 +3,9 @@ import java.util.Properties
 
 plugins {
     alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.hilt.android)
-    kotlin("kapt")
+    alias(libs.plugins.ksp)
 }
 
 var keystoreProperties = Properties()
@@ -41,31 +40,31 @@ android {
             applicationIdSuffix = ".deb"
             isDebuggable = true
             isMinifyEnabled = false
-            manifestPlaceholders["admob_app_id"] = project.properties["admobAppIdSample"] as String
+            manifestPlaceholders["admob_app_id"] = project.findProperty("admobAppIdSample") as String
             buildConfigField(
                 "String",
                 "admob_app_id",
-                '"' + "${project.properties["admobAppIdSample"] ?: ""}" + '"'
+                '"' + "${project.findProperty("admobAppIdSample") ?: ""}" + '"'
             )
             resValue(
                 "string",
                 "ad_unit_id",
-                project.properties["admobBannerSample"] as String
+                project.findProperty("admobBannerSample") as String
             )
         }
         release {
             isMinifyEnabled = true
             manifestPlaceholders["admob_app_id"] =
-                project.properties["admobAppIdStoragePath"] as String
+                project.findProperty("admobAppIdStoragePath") as String
             buildConfigField(
                 "String",
                 "admob_app_id",
-                '"' + "${project.properties["admobAppIdStoragePath"] ?: ""}" + '"'
+                '"' + "${project.findProperty("admobAppIdStoragePath") ?: ""}" + '"'
             )
             resValue(
                 "string",
                 "ad_unit_id",
-                project.properties["admobBannerStoragePath"] as String
+                project.findProperty("admobBannerStoragePath") as String
             )
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
@@ -74,18 +73,19 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
-    kotlinOptions {
-        jvmTarget = "11"
+    // New DSL for Kotlin in AGP 9.0+
+    kotlin {
+        compilerOptions {
+            jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17)
+        }
     }
     buildFeatures {
         buildConfig = true
         compose = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.15"
+        resValues = true
     }
     packaging {
         resources {
@@ -99,17 +99,15 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     implementation(libs.compose.material3)
     implementation(libs.androidx.runtime.android)
-    implementation(libs.androidx.navigation.compose)
     implementation(libs.compose.foundation)
     implementation(libs.compose.ui.graphics)
     implementation(libs.androidx.activity.compose)
-    implementation(libs.androidx.espresso.core)
     implementation(libs.compose.ui.tooling.preview)
     debugImplementation(libs.compose.ui.tooling)
     implementation(libs.accompanist.permissions)
     implementation(libs.play.services.ads)
     implementation(libs.hilt.android)
-    kapt(libs.hilt.compiler)
+    ksp(libs.hilt.compiler)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
