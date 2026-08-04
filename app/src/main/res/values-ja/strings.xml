@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">シム情報</string>
+    <string name="title_activity_sub">SubActivity</string>
+    <string name="voiceMailNumberLabel">ボイスメール番号</string>
+    <string name="phoneNumberLabel">電話番号</string>
+    <string name="simCountryIsoLabel">SIM国別コード</string>
+    <string name="simSerialNumberLabel">SIMシリアルナンバー</string>
+    <string name="deviceIdLabel">携帯端末固有(deviceId)</string>
+    <string name="androidIdLabel">Android ID</string>
+    <string name="simOperatorLabel">MCC+MNC</string>
+    <string name="simOperatorNameLabel">サービスプロバイダ名</string>
+    <string name="simStateLabel">SIM状態</string>
+
+    <string name="admob_native_unit_id">dummy</string>
+
+    <string name="dataUsageSectionTitle">モバイルデータ使用量</string>
+    <string name="dataUsageToday">今日</string>
+    <string name="dataUsageYesterday">昨日</string>
+    <string name="dataUsageWeek">今週</string>
+    <string name="dataUsageMonth">今月</string>
+    <string name="dataUsageDownload">ダウンロード</string>
+    <string name="dataUsageUpload">アップロード</string>
+    <string name="grantUsageAccessAction">使用状況へのアクセスを許可</string>
+    <string name="usageAccessDescription">SIMデータ使用量を測定するには、システム設定で使用状況へのアクセスを許可してください。</string>
+    <string name="usageAccessButton">設定を開く</string>
+
+    <string name="detail_screen_title">詳細画面</string>
+    <string name="detail_screen_message">メッセージ: %1$s</string>
+    <string name="back_button">戻る</string>
+
+    <string name="permission_denied_title">権限が拒否されました</string>
+    <string name="permission_denied_message">%1$s の権限が必要です。設定から許可してください。</string>
+    <string name="app_info_button">アプリ情報</string>
+    <string name="cancel_button">キャンセル</string>
+
+    <string name="not_supported_android_10">Android 10以降ではサポートされていません</string>
+</resources>

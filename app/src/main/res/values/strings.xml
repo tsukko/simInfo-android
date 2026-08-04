@@ -1,13 +1,37 @@
 <resources>
-    <string name="app_name">MySIMInfo</string>
+    <string name="app_name">SIM Info</string>
     <string name="title_activity_sub">SubActivity</string>
-    <string name="voiceMailNumberLabel">voiceMailNumber</string>
+    <string name="voiceMailNumberLabel">Voice Mail Number</string>
     <string name="phoneNumberLabel">Phone Number</string>
-    <string name="simCountryIsoLabel">SIM国別コード</string>
-    <string name="simSerialNumberLabel">SIMシリアルナンバー</string>
-    <string name="deviceIdLabel">携帯端末固有(deviceId)</string>
+    <string name="simCountryIsoLabel">SIM Country ISO</string>
+    <string name="simSerialNumberLabel">SIM Serial Number</string>
+    <string name="deviceIdLabel">Device ID (deviceId)</string>
     <string name="androidIdLabel">Android ID</string>
     <string name="simOperatorLabel">MCC+MNC</string>
-    <string name="simOperatorNameLabel">サービスプロバイダ名</string>
-    <string name="simStateLabel">SIM状態</string>
+    <string name="simOperatorNameLabel">Service Provider Name</string>
+    <string name="simStateLabel">SIM State</string>
+
+    <string name="admob_native_unit_id">dummy</string>
+
+    <string name="dataUsageSectionTitle">Mobile Data Usage</string>
+    <string name="dataUsageToday">Today</string>
+    <string name="dataUsageYesterday">Yesterday</string>
+    <string name="dataUsageWeek">This Week</string>
+    <string name="dataUsageMonth">This Month</string>
+    <string name="dataUsageDownload">Download</string>
+    <string name="dataUsageUpload">Upload</string>
+    <string name="grantUsageAccessAction">Grant Usage Access</string>
+    <string name="usageAccessDescription">To measure SIM data usage, please grant usage access in system settings.</string>
+    <string name="usageAccessButton">Open Settings</string>
+
+    <string name="detail_screen_title">Detail Screen</string>
+    <string name="detail_screen_message">Message: %1$s</string>
+    <string name="back_button">Back</string>
+
+    <string name="permission_denied_title">Permission Denied</string>
+    <string name="permission_denied_message">%1$s permission is required. Please grant it in settings.</string>
+    <string name="app_info_button">App Info</string>
+    <string name="cancel_button">Cancel</string>
+
+    <string name="not_supported_android_10">Not supported on Android 10+</string>
 </resources>
