@@ -40,6 +40,22 @@ import jp.co.integrityworks.mysiminfo.BuildConfig
 import jp.co.integrityworks.mysiminfo.R
 import jp.co.integrityworks.mysiminfo.ui.theme.MyAppTheme
 
+import android.content.Intent
+import android.provider.Settings
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.draw.clip
+
 /**
  * メイン画面のコンポーザブル
  */
@@ -56,6 +72,9 @@ fun HomeScreen(
         contract = ActivityResultContracts.RequestPermission()
     ) { isGranted ->
         hasPermission = isGranted
+        if (isGranted) {
+            viewModel.initParameters(context)
+        }
     }
 
     // 画面が開かれたときにパーミッションを確認 & 必要なら要求
@@ -69,7 +88,13 @@ fun HomeScreen(
             permissionLauncher.launch(Manifest.permission.READ_PHONE_STATE)
         } else {
             hasPermission = true
+            viewModel.initParameters(context)
         }
+    }
+
+    // 通信量の更新
+    LaunchedEffect(Unit) {
+        viewModel.updateUsageStats(context)
     }
 
     Scaffold(
@@ -116,6 +141,101 @@ fun HomeScreen(
  * 電話情報の各項目を表示するコンポーザブル
  */
 @Composable
+fun DataUsageSection(viewModel: HomeViewModel, context: android.content.Context) {
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.surfaceVariant
+        )
+    ) {
+        Column(modifier = Modifier.padding(16.dp)) {
+            Text(
+                text = stringResource(id = R.string.dataUsageSectionTitle),
+                style = MaterialTheme.typography.titleMedium,
+                color = MaterialTheme.colorScheme.primary
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+
+            if (!viewModel.isUsageAccessGranted) {
+                Text(
+                    text = stringResource(id = R.string.usageAccessDescription),
+                    style = MaterialTheme.typography.bodySmall
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+                Button(
+                    onClick = {
+                        context.startActivity(Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS))
+                    },
+                    modifier = Modifier.align(Alignment.End)
+                ) {
+                    Text(text = stringResource(id = R.string.usageAccessButton))
+                }
+            } else {
+                Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        UsageItem(
+                            label = stringResource(id = R.string.dataUsageToday),
+                            value = viewModel.dailyUsage,
+                            modifier = Modifier.weight(1f)
+                        )
+                        UsageItem(
+                            label = stringResource(id = R.string.dataUsageYesterday),
+                            value = viewModel.yesterdayUsage,
+                            modifier = Modifier.weight(1f)
+                        )
+                    }
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        UsageItem(
+                            label = stringResource(id = R.string.dataUsageWeek),
+                            value = viewModel.weeklyUsage,
+                            modifier = Modifier.weight(1f)
+                        )
+                        UsageItem(
+                            label = stringResource(id = R.string.dataUsageMonth),
+                            value = viewModel.monthlyUsage,
+                            modifier = Modifier.weight(1f)
+                        )
+                    }
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        UsageItem(
+                            label = stringResource(id = R.string.dataUsageDownload),
+                            value = viewModel.monthlyDownload,
+                            modifier = Modifier.weight(1f)
+                        )
+                        UsageItem(
+                            label = stringResource(id = R.string.dataUsageUpload),
+                            value = viewModel.monthlyUpload,
+                            modifier = Modifier.weight(1f)
+                        )
+                    }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun UsageItem(label: String, value: String, modifier: Modifier = Modifier) {
+    Column(modifier = modifier) {
+        Text(text = label, style = MaterialTheme.typography.labelMedium)
+        Text(
+            text = value,
+            style = MaterialTheme.typography.headlineSmall,
+            color = MaterialTheme.colorScheme.secondary
+        )
+    }
+}
+
+@Composable
 fun InfoItem(title: String, data: String) {
     Column(modifier = Modifier.padding(vertical = 8.dp)) {
         Text(text = title, style = MaterialTheme.typography.titleSmall)
@@ -128,6 +248,7 @@ fun BodyCompose(
     paddingValues: PaddingValues,
     viewModel: HomeViewModel
 ) {
+    val context = LocalContext.current
     Column(
         modifier = Modifier
             .padding(paddingValues)
@@ -136,6 +257,9 @@ fun BodyCompose(
             .padding(horizontal = 16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
+        Spacer(modifier = Modifier.height(8.dp)) // Top margin
+        DataUsageSection(viewModel = viewModel, context = context)
+
         InfoItem(
             title = stringResource(id = R.string.phoneNumberLabel),
             data = viewModel.line1Number

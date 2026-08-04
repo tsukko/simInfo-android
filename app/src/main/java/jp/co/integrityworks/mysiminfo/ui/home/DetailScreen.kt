@@ -14,6 +14,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 
+import androidx.compose.ui.res.stringResource
+import jp.co.integrityworks.mysiminfo.R
+
 @Composable
 fun DetailScreen(
     navController: NavController,
@@ -25,12 +28,12 @@ fun DetailScreen(
             .padding(16.dp),
         verticalArrangement = Arrangement.Center
     ) {
-        Text("Detail Screen", style = MaterialTheme.typography.headlineMedium)
+        Text(stringResource(id = R.string.detail_screen_title), style = MaterialTheme.typography.headlineMedium)
         Spacer(modifier = Modifier.height(16.dp))
-        Text("Message: $message", style = MaterialTheme.typography.bodyMedium)
+        Text(stringResource(id = R.string.detail_screen_message, message), style = MaterialTheme.typography.bodyMedium)
         Spacer(modifier = Modifier.height(16.dp))
         Button(onClick = { navController.popBackStack() }) {
-            Text("Back")
+            Text(stringResource(id = R.string.back_button))
         }
     }
 }

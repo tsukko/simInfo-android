@@ -11,6 +11,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.res.stringResource
+import jp.co.integrityworks.mysiminfo.R
 import jp.co.integrityworks.mysiminfo.util.RuntimePermissionAlertDialog as RuntimePermissionAlertDialog1
 
 /**
@@ -28,8 +30,8 @@ fun RuntimePermissionAlertDialog(
 
     AlertDialog(
         onDismissRequest = onDismissRequest,
-        title = { Text(text = "Permission Denied") },
-        text = { Text(text = "$permission の権限が必要です。設定から許可してください。") },
+        title = { Text(text = stringResource(id = R.string.permission_denied_title)) },
+        text = { Text(text = stringResource(id = R.string.permission_denied_message, permission)) },
         confirmButton = {
             TextButton(
                 onClick = {
@@ -44,12 +46,12 @@ fun RuntimePermissionAlertDialog(
                     onDismissRequest()
                 }
             ) {
-                Text("アプリ情報")
+                Text(stringResource(id = R.string.app_info_button))
             }
         },
         dismissButton = {
             TextButton(onClick = onDismissRequest) {
-                Text("キャンセル")
+                Text(stringResource(id = R.string.cancel_button))
             }
         }
     )
