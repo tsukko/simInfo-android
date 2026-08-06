@@ -22,8 +22,8 @@ android {
         applicationId = "jp.co.integrityworks.mysiminfo"
         minSdk = libs.versions.minSdk.get().toInt()
         targetSdk = libs.versions.targetSdk.get().toInt()
-        versionCode = 14
-        versionName = "2.0"
+        versionCode = 15
+        versionName = "2.1"
 
         androidResources {
             localeFilters += listOf("en", "ja")
