@@ -14,6 +14,10 @@ import jp.co.integrityworks.mysiminfo.util.DataUsageHelper
 
 import jp.co.integrityworks.mysiminfo.R
 
+import androidx.lifecycle.viewModelScope
+import jp.co.integrityworks.mysiminfo.util.NetworkHelper
+import kotlinx.coroutines.launch
+
 class HomeViewModel : ViewModel() {
     var line1Number by mutableStateOf("")
         private set
@@ -49,6 +53,48 @@ class HomeViewModel : ViewModel() {
     var monthlyUpload by mutableStateOf("0.00 MB")
         private set
 
+    // WiFi Usage
+    var dailyWifiUsage by mutableStateOf("0.00 MB")
+        private set
+    var monthlyWifiUsage by mutableStateOf("0.00 MB")
+        private set
+
+    // Network Details
+    var connectionType by mutableStateOf("None")
+        private set
+    var privateIp by mutableStateOf("Unknown")
+        private set
+    var publicIp by mutableStateOf("Fetching...")
+        private set
+    var wifiSsid by mutableStateOf("Unknown")
+        private set
+    var wifiSignal by mutableStateOf("N/A")
+        private set
+    var wifiLinkSpeed by mutableStateOf("N/A")
+        private set
+
+    // Speed Test
+    var downloadSpeed by mutableStateOf("0.0 Mbps")
+        private set
+    var uploadSpeed by mutableStateOf("0.0 Mbps")
+        private set
+    var isTesting by mutableStateOf(false)
+        private set
+
+    // Device Information
+    var androidVersion by mutableStateOf("")
+        private set
+    var apiLevel by mutableStateOf("")
+        private set
+    var securityPatch by mutableStateOf("")
+        private set
+    var deviceModel by mutableStateOf("")
+        private set
+    var manufacturer by mutableStateOf("")
+        private set
+    var kernelVersion by mutableStateOf("")
+        private set
+
     @SuppressLint("MissingPermission", "HardwareIds")
     fun initParameters(context: Context) {
         val telMgr = context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
@@ -69,12 +115,12 @@ class HomeViewModel : ViewModel() {
         line1Number = ""
         simCountryIso = telMgr.simCountryIso ?: ""
         simSerialNumber = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            context.getString(R.string.not_supported_android_10)
+            context.getString(R.string.restricted_by_android)
         } else {
             telMgr.simSerialNumber ?: ""
         }
         deviceId = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            context.getString(R.string.not_supported_android_10)
+            context.getString(R.string.restricted_by_android)
         } else {
             // Access to device identifiers is restricted; do not use deprecated APIs.
             ""
@@ -84,6 +130,14 @@ class HomeViewModel : ViewModel() {
         simOperatorName = telMgr.simOperatorName ?: ""
         simState = telMgr.simState.toString()
         voiceMailNumber = telMgr.voiceMailNumber ?: ""
+
+        // Device Info
+        androidVersion = Build.VERSION.RELEASE
+        apiLevel = Build.VERSION.SDK_INT.toString()
+        securityPatch = Build.VERSION.SECURITY_PATCH
+        deviceModel = Build.MODEL
+        manufacturer = Build.MANUFACTURER
+        kernelVersion = System.getProperty("os.version") ?: "Unknown"
     }
 
     fun updateUsageStats(context: Context) {
@@ -106,6 +160,50 @@ class HomeViewModel : ViewModel() {
             monthlyUsage = helper.formatBytes(monthRx + monthTx)
             monthlyDownload = helper.formatBytes(monthRx)
             monthlyUpload = helper.formatBytes(monthTx)
+
+            // WiFi Usage
+            val (wifiTodayRx, wifiTodayTx) = helper.getWifiDataUsage(DataUsageHelper.getTodayStart(), now)
+            dailyWifiUsage = helper.formatBytes(wifiTodayRx + wifiTodayTx)
+
+            val (wifiMonthRx, wifiMonthTx) = helper.getWifiDataUsage(DataUsageHelper.getMonthStart(), now)
+            monthlyWifiUsage = helper.formatBytes(wifiMonthRx + wifiMonthTx)
+        }
+    }
+
+    fun updateNetworkInfo(context: Context) {
+        val helper = NetworkHelper(context)
+        connectionType = helper.getConnectionType()
+        privateIp = helper.getPrivateIpAddress()
+        
+        if (connectionType == "WiFi") {
+            val details = helper.getWifiDetails()
+            wifiSsid = details["SSID"] ?: "Unknown"
+            wifiSignal = details["Signal"] ?: "N/A"
+            wifiLinkSpeed = details["LinkSpeed"] ?: "N/A"
+        } else {
+            wifiSsid = "N/A"
+            wifiSignal = "N/A"
+            wifiLinkSpeed = "N/A"
+        }
+
+        viewModelScope.launch {
+            publicIp = helper.getPublicIpAddress()
+        }
+    }
+
+    fun runSpeedTest(context: Context) {
+        if (isTesting) return
+        isTesting = true
+        val helper = NetworkHelper(context)
+        
+        viewModelScope.launch {
+            val down = helper.testDownloadSpeed()
+            downloadSpeed = "%.1f Mbps".format(down)
+            
+            val up = helper.testUploadSpeed()
+            uploadSpeed = "%.1f Mbps".format(up)
+            
+            isTesting = false
         }
     }
 }

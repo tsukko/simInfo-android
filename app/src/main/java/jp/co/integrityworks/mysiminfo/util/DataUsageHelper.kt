@@ -48,6 +48,27 @@ class DataUsageHelper(private val context: Context) {
     }
 
     /**
+     * Get WiFi data usage for a specific time range.
+     */
+    @Suppress("DEPRECATION")
+    fun getWifiDataUsage(startTime: Long, endTime: Long): Pair<Long, Long> {
+        val networkStatsManager =
+            context.getSystemService(Context.NETWORK_STATS_SERVICE) as NetworkStatsManager
+
+        return try {
+            val bucket = networkStatsManager.querySummaryForDevice(
+                NetworkCapabilities.TRANSPORT_WIFI,
+                null,
+                startTime,
+                endTime
+            )
+            Pair(bucket.rxBytes, bucket.txBytes)
+        } catch (e: Exception) {
+            Pair(0L, 0L)
+        }
+    }
+
+    /**
      * Formats bytes into a human-readable string (MB/GB).
      */
     fun formatBytes(bytes: Long): String {

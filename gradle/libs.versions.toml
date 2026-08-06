@@ -12,8 +12,9 @@ navigationCompose = "2.9.8"
 material3Android = "1.4.0"
 activityCompose = "1.13.0"
 compose = "1.11.4"
+materialIconsExtended = "1.7.8"
 playServicesAdsLite = "25.4.0"
-accompanist_permissions = "0.37.3"
+accompanistPermissions = "0.37.3"
 hilt = "2.60.1"
 compose_bom = "2026.06.01"
 ksp = "2.3.11"
@@ -30,8 +31,9 @@ compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = 
 compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "compose" }
 compose-ui-graphics = { module = "androidx.compose.ui:ui-graphics", version.ref = "compose" }
 compose-foundation = { module = "androidx.compose.foundation:foundation", version.ref = "compose" }
+compose-icons = { group = "androidx.compose.material", name = "material-icons-extended", version.ref = "materialIconsExtended" }
 compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "compose_bom" }
-accompanist-permissions = { module = "com.google.accompanist:accompanist-permissions", version.ref = "accompanist_permissions" }
+accompanist-permissions = { module = "com.google.accompanist:accompanist-permissions", version.ref = "accompanistPermissions" }
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
 hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hilt" }
 play-services-ads = { group = "com.google.android.gms", name = "play-services-ads", version.ref = "playServicesAdsLite" }

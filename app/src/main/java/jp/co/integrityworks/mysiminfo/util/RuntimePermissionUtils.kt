@@ -14,6 +14,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.res.stringResource
 import jp.co.integrityworks.mysiminfo.R
 import jp.co.integrityworks.mysiminfo.util.RuntimePermissionAlertDialog as RuntimePermissionAlertDialog1
+import androidx.core.net.toUri
 
 /**
  * 指定されたパーミッション名に応じた警告ダイアログを表示するComposable。
@@ -38,7 +39,7 @@ fun RuntimePermissionAlertDialog(
                     // システムのアプリ設定画面へ遷移
                     val intent = Intent(
                         Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
-                        Uri.parse("package:" + context.packageName)
+                        ("package:" + context.packageName).toUri()
                     ).apply {
                         addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                     }
