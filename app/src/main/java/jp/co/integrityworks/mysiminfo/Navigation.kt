@@ -8,8 +8,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import jp.co.integrityworks.mysiminfo.ui.MainScreen
 import jp.co.integrityworks.mysiminfo.ui.home.DetailScreen
-import jp.co.integrityworks.mysiminfo.ui.home.HomeScreen
 import jp.co.integrityworks.mysiminfo.ui.home.HomeViewModel
 
 @Composable
@@ -18,11 +18,11 @@ fun NavigationHost(
 ) {
     NavHost(
         navController = navController,
-        startDestination = "home"
+        startDestination = "main"
     ) {
-        composable("home") {
+        composable("main") {
             val viewModel: HomeViewModel = viewModel()
-            HomeScreen(viewModel)
+            MainScreen(viewModel)
         }
         composable(
             "detail/{message}",

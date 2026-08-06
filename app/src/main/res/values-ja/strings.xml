@@ -1,15 +1,15 @@
 <resources>
-    <string name="app_name">シム情報</string>
+    <string name="app_name">ネットワーク＆SIM情報</string>
     <string name="title_activity_sub">SubActivity</string>
     <string name="voiceMailNumberLabel">ボイスメール番号</string>
     <string name="phoneNumberLabel">電話番号</string>
-    <string name="simCountryIsoLabel">SIM国別コード</string>
-    <string name="simSerialNumberLabel">SIMシリアルナンバー</string>
-    <string name="deviceIdLabel">携帯端末固有(deviceId)</string>
+    <string name="simCountryIsoLabel">国コード (ISO)</string>
+    <string name="simSerialNumberLabel">シリアル番号 (ICCID)</string>
+    <string name="deviceIdLabel">デバイスID (IMEI/MEID)</string>
     <string name="androidIdLabel">Android ID</string>
-    <string name="simOperatorLabel">MCC+MNC</string>
-    <string name="simOperatorNameLabel">サービスプロバイダ名</string>
-    <string name="simStateLabel">SIM状態</string>
+    <string name="simOperatorLabel">事業者コード (MCC/MNC)</string>
+    <string name="simOperatorNameLabel">通信事業者名</string>
+    <string name="simStateLabel">SIMステータス</string>
 
     <string name="admob_native_unit_id">dummy</string>
 
@@ -20,9 +20,14 @@
     <string name="dataUsageMonth">今月</string>
     <string name="dataUsageDownload">ダウンロード</string>
     <string name="dataUsageUpload">アップロード</string>
+    <string name="dataUsageWifiToday">WiFi 今日</string>
+    <string name="dataUsageWifiMonth">WiFi 今月</string>
     <string name="grantUsageAccessAction">使用状況へのアクセスを許可</string>
     <string name="usageAccessDescription">SIMデータ使用量を測定するには、システム設定で使用状況へのアクセスを許可してください。</string>
     <string name="usageAccessButton">設定を開く</string>
+
+    <string name="phone_permission_description">SIM情報を表示するには、電話の権限を許可してください。</string>
+    <string name="restricted_by_android">Androidの制限により取得不可 (OS 10/11以降)</string>
 
     <string name="detail_screen_title">詳細画面</string>
     <string name="detail_screen_message">メッセージ: %1$s</string>
@@ -33,5 +38,40 @@
     <string name="app_info_button">アプリ情報</string>
     <string name="cancel_button">キャンセル</string>
 
-    <string name="not_supported_android_10">Android 10以降ではサポートされていません</string>
+    <string name="tab_sim">SIM</string>
+    <string name="tab_network">接続</string>
+    <string name="tab_usage">使用量</string>
+    <string name="tab_device">デバイス</string>
+    <string name="tab_speed">速度</string>
+
+    <string name="sim_info_section_title">SIM情報</string>
+    <string name="network_section_title">ネットワーク接続</string>
+    <string name="device_info_section_title">デバイス情報</string>
+    <string name="os_info_card_title">OS情報</string>
+    <string name="hardware_info_card_title">ハードウェア情報</string>
+
+    <string name="android_version_label">Androidバージョン</string>
+    <string name="api_level_label">APIレベル</string>
+    <string name="security_patch_label">セキュリティパッチ</string>
+    <string name="model_label">モデル名</string>
+    <string name="manufacturer_label">メーカー</string>
+    <string name="kernel_version_label">カーネルバージョン</string>
+
+    <string name="ip_section_title">インターネットプロトコル</string>
+    <string name="wifi_details_section_title">無線詳細</string>
+    <string name="sim_hardware_section_title">ハードウェア識別子</string>
+    <string name="sim_others_section_title">その他</string>
+    <string name="connection_type_label">接続タイプ</string>
+    <string name="private_ip_label">プライベートIPアドレス</string>
+    <string name="public_ip_label">パブリックIPアドレス</string>
+    <string name="wifi_ssid_label">WiFi SSID</string>
+    <string name="wifi_signal_label">信号強度</string>
+    <string name="wifi_link_speed_label">リンク速度</string>
+
+    <string name="speed_test_section_title">速度測定</string>
+    <string name="download_label">ダウンロード</string>
+    <string name="upload_label">アップロード</string>
+    <string name="start_test_button">測定開始</string>
+    <string name="speed_test_data_warning">※正確な測定のため、約30MBのデータ通信が発生します。</string>
+    <string name="testing_status">測定中…</string>
 </resources>

@@ -1,15 +1,15 @@
 <resources>
-    <string name="app_name">SIM Info</string>
+    <string name="app_name">Net &amp; SIM Info</string>
     <string name="title_activity_sub">SubActivity</string>
     <string name="voiceMailNumberLabel">Voice Mail Number</string>
     <string name="phoneNumberLabel">Phone Number</string>
-    <string name="simCountryIsoLabel">SIM Country ISO</string>
-    <string name="simSerialNumberLabel">SIM Serial Number</string>
-    <string name="deviceIdLabel">Device ID (deviceId)</string>
+    <string name="simCountryIsoLabel">Country Code (ISO)</string>
+    <string name="simSerialNumberLabel">Serial Number (ICCID)</string>
+    <string name="deviceIdLabel">Device ID (IMEI/MEID)</string>
     <string name="androidIdLabel">Android ID</string>
-    <string name="simOperatorLabel">MCC+MNC</string>
-    <string name="simOperatorNameLabel">Service Provider Name</string>
-    <string name="simStateLabel">SIM State</string>
+    <string name="simOperatorLabel">Operator Code (MCC/MNC)</string>
+    <string name="simOperatorNameLabel">Network Operator</string>
+    <string name="simStateLabel">SIM Status</string>
 
     <string name="admob_native_unit_id">dummy</string>
 
@@ -20,9 +20,14 @@
     <string name="dataUsageMonth">This Month</string>
     <string name="dataUsageDownload">Download</string>
     <string name="dataUsageUpload">Upload</string>
+    <string name="dataUsageWifiToday">WiFi Today</string>
+    <string name="dataUsageWifiMonth">WiFi Month</string>
     <string name="grantUsageAccessAction">Grant Usage Access</string>
     <string name="usageAccessDescription">To measure SIM data usage, please grant usage access in system settings.</string>
     <string name="usageAccessButton">Open Settings</string>
+
+    <string name="phone_permission_description">Please grant phone permissions to view SIM information.</string>
+    <string name="restricted_by_android">Restricted by Android system (OS 10/11+)</string>
 
     <string name="detail_screen_title">Detail Screen</string>
     <string name="detail_screen_message">Message: %1$s</string>
@@ -33,5 +38,40 @@
     <string name="app_info_button">App Info</string>
     <string name="cancel_button">Cancel</string>
 
-    <string name="not_supported_android_10">Not supported on Android 10+</string>
+    <string name="tab_sim">SIM</string>
+    <string name="tab_network">Network</string>
+    <string name="tab_usage">Usage</string>
+    <string name="tab_device">Device</string>
+    <string name="tab_speed">Speed</string>
+
+    <string name="sim_info_section_title">SIM Information</string>
+    <string name="network_section_title">Network Connection</string>
+    <string name="device_info_section_title">Device Information</string>
+    <string name="os_info_card_title">Operating System</string>
+    <string name="hardware_info_card_title">Hardware</string>
+
+    <string name="android_version_label">Android Version</string>
+    <string name="api_level_label">API Level</string>
+    <string name="security_patch_label">Security Patch</string>
+    <string name="model_label">Model</string>
+    <string name="manufacturer_label">Manufacturer</string>
+    <string name="kernel_version_label">Kernel Version</string>
+
+    <string name="ip_section_title">Internet Protocol</string>
+    <string name="wifi_details_section_title">Wireless Details</string>
+    <string name="sim_hardware_section_title">Hardware Identifiers</string>
+    <string name="sim_others_section_title">Others</string>
+    <string name="connection_type_label">Connection Type</string>
+    <string name="private_ip_label">Private IP Address</string>
+    <string name="public_ip_label">Public IP Address</string>
+    <string name="wifi_ssid_label">WiFi SSID</string>
+    <string name="wifi_signal_label">Signal Strength</string>
+    <string name="wifi_link_speed_label">Link Speed</string>
+
+    <string name="speed_test_section_title">Speed Test</string>
+    <string name="download_label">Download</string>
+    <string name="upload_label">Upload</string>
+    <string name="start_test_button">Start Speed Test</string>
+    <string name="speed_test_data_warning">* Approx. 30MB of data will be used for accurate measurement.</string>
+    <string name="testing_status">Testing...</string>
 </resources>
