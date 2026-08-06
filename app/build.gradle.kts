@@ -22,8 +22,8 @@ android {
         applicationId = "jp.co.integrityworks.mysiminfo"
         minSdk = libs.versions.minSdk.get().toInt()
         targetSdk = libs.versions.targetSdk.get().toInt()
-        versionCode = 14
-        versionName = "2.0"
+        versionCode = 15
+        versionName = "2.1"
 
         androidResources {
             localeFilters += listOf("en", "ja")
@@ -106,6 +106,7 @@ dependencies {
     implementation(platform(libs.compose.bom))
     implementation(libs.androidx.navigation.compose)
     implementation(libs.compose.material3)
+    implementation(libs.material)
     implementation(libs.androidx.runtime.android)
     implementation(libs.compose.foundation)
     implementation(libs.compose.icons)
