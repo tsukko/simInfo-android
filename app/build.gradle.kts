@@ -22,7 +22,7 @@ android {
         applicationId = "jp.co.integrityworks.mysiminfo"
         minSdk = libs.versions.minSdk.get().toInt()
         targetSdk = libs.versions.targetSdk.get().toInt()
-        versionCode = 15
+        versionCode = 16
         versionName = "2.1"
 
         androidResources {

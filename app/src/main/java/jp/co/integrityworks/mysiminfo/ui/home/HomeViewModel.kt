@@ -15,10 +15,13 @@ import jp.co.integrityworks.mysiminfo.util.DataUsageHelper
 import jp.co.integrityworks.mysiminfo.R
 
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import jp.co.integrityworks.mysiminfo.util.NetworkHelper
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class HomeViewModel : ViewModel() {
+@HiltViewModel
+class HomeViewModel @Inject constructor() : ViewModel() {
     var line1Number by mutableStateOf("")
         private set
     var simCountryIso by mutableStateOf("")

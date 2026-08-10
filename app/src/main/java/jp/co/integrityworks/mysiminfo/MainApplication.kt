@@ -9,6 +9,10 @@ class MainApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         // AdMobSDKのイニシャライズ
-        MobileAds.initialize(this)
+        try {
+            MobileAds.initialize(this)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 }
